@@ -1,0 +1,22 @@
+{
+	"schemaVersion": 1,
+	"id": "cargoghast",
+	"version": "${version}",
+	"name": "Cargo Ghast",
+	"description": "Happy Ghasts that actually fly, turn, and carry a chest like a mule.",
+	"authors": ["LectWolf"],
+	"license": "GPL-3.0-only",
+	"icon": "assets/cargoghast/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": ["cc.mcii.mcmod.cargoghast.CargoGhast"],
+		"client": ["cc.mcii.mcmod.cargoghast.CargoGhastClient"]
+	},
+	"mixins": ["cargoghast.mixins.json"],
+	"depends": {
+		"fabricloader": ">=0.19.5",
+		"minecraft": "${minecraft}",
+		"java": ">=${java}",
+		"fabric-api": "*"
+	}
+}

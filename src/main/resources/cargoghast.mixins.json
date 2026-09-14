@@ -1,0 +1,19 @@
+{
+	"required": true,
+	"package": "cc.mcii.mcmod.cargoghast.mixin",
+	"compatibilityLevel": "JAVA_21",
+	"mixins": [
+		"HappyGhastMixin",
+		"EntityRemoveMixin",
+		"ServerGamePacketListenerImplMixin"
+	],
+	"client": [
+		"MultiPlayerGameModeMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"overwrites": {
+		"requireAnnotations": true
+	}
+}

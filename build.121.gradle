@@ -1,0 +1,48 @@
+plugins {
+	id 'net.fabricmc.fabric-loom-remap'
+}
+
+def mcDep = project.property('mod.mc_dep')
+def javaVer = (project.property('java_version') as String).toInteger()
+
+version = "${project.property('mod.version')}+${project.property('deps.minecraft')}"
+group = project.property('mod.group')
+base {
+	archivesName = project.property('mod.id')
+}
+
+dependencies {
+	minecraft "com.mojang:minecraft:${project.property('deps.minecraft')}"
+	mappings loom.officialMojangMappings()
+	modImplementation "net.fabricmc:fabric-loader:${project.property('deps.loader')}"
+	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.property('deps.fabric_api')}"
+}
+
+processResources {
+	def props = [
+		version: project.version,
+		minecraft: mcDep,
+		java: javaVer.toString(),
+	]
+	inputs.properties props
+	filesMatching('fabric.mod.json') {
+		expand props
+	}
+}
+
+tasks.withType(JavaCompile).configureEach {
+	it.options.release = javaVer
+	it.options.encoding = 'UTF-8'
+}
+
+java {
+	withSourcesJar()
+	sourceCompatibility = JavaVersion.toVersion(javaVer)
+	targetCompatibility = JavaVersion.toVersion(javaVer)
+}
+
+jar {
+	from('LICENSE') {
+		rename { "${it}_${project.name}" }
+	}
+}
