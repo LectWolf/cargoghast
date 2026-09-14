@@ -2,7 +2,6 @@ package cc.mcii.mcmod.cargoghast.mixin;
 
 import cc.mcii.mcmod.cargoghast.CargoGhast;
 import cc.mcii.mcmod.cargoghast.GhastChestHolder;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
@@ -168,9 +167,10 @@ public abstract class HappyGhastMixin implements GhastChestHolder {
 		if (!this.cargoghast$hasChest) {
 			return;
 		}
+		HappyGhast ghast = (HappyGhast) (Object) this;
 		player.openMenu(new SimpleMenuProvider(
 			(id, inv, p) -> ChestMenu.threeRows(id, inv, this.cargoghast$chest),
-			Component.translatable("container.cargoghast.chest")
+			ghast.getDisplayName()
 		));
 	}
 }
